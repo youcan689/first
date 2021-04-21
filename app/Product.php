@@ -5,9 +5,9 @@ namespace App;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
-class Production extends Model
+class Product extends Model
 {
-    protected $table = 'productions';
+    protected $table = 'products';
     
     public function user()
     {

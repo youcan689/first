@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Production;
+use App\Product;
 
-class ProductionController extends Controller
+class ProductController extends Controller
 {
     public function index()
     {
@@ -13,6 +13,6 @@ class ProductionController extends Controller
 
     public function get()
     {
-        return Production::all();
+        return Product::all();
     }
 }
