@@ -13,3 +13,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/showProductions', 'ProductController@index')->name('index');
 Route::get('/productions', 'ProductController@get');
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('management/product', 'ManagementController');
+
+    Route::get('/management/showOwnProducts', 'ManagementController@showOwnProducts');
+});
