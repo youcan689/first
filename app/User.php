@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Production;
+use App\Product;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -36,8 +36,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function productions()
+    public function products()
     {
-        return $this->hasMany(Production::class);
+        return $this->hasMany(Product::class);
     }
 }
