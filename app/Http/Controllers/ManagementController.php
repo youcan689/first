@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class ManagementController extends Controller
 {
@@ -37,7 +38,18 @@ class ManagementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product = new Product(Arr::only(request('product'), [
+            'title',
+            'description',
+            'price',
+            'published',
+        ]));
+        $product->user()->associate(auth()->user());
+        $product->save();
+
+        return [
+            'productBeenAdded' => $product
+        ];
     }
 
     /**
