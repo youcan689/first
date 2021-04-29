@@ -5,8 +5,7 @@
 @endsection
 
 @section('body')
-<div id="app">
-<v-app id="appmain">
+<v-app id="app">
     <v-app-bar app flat color="white">
     <v-container class="py-0 fill-height">
         <v-avatar class="mr-10" color="grey darken-1" size="32"></v-avatar>
@@ -17,6 +16,7 @@
 
         <v-spacer></v-spacer>
 
+        <product-update-form class="mr-3" @completed="updateFormCompleted"></product-update-form>
         <v-responsive max-width="260">
             <v-text-field dense flat hide-details solo-inverted class="rounded-lg"></v-text-field>
         </v-responsive>
@@ -52,7 +52,6 @@
     </v-container>
     </v-content>
 </v-app>
-</div>
 
 <script>
     var app = new Vue({
@@ -67,20 +66,29 @@
 
         },
         methods: {
-            
+            updateFormCompleted(item, index) {
+                if (index < 0)
+                    this.products.push(item);
+                else
+                    Object.assign(this.products[index], item);
+            }
         },
         components: {
             'product-list': httpVueLoader('/js/vue/ProductList.vue'),
+            'product-update-form': httpVueLoader('/js/vue/ProductUpdateForm.vue'),
         },
         mounted: function() {
             var self = this;
             axios({
                 method: 'get',
-                url: '/management/product',
+                url: '/management/products',
                 responseType: 'json',
             })
             .then(function (response) {
                 self.products = response.data.products;
+            }).catch(function(error) {
+                console.error('get resource form server failed. leak data: [products]');
+                console.error(error);
             });
         },
     });

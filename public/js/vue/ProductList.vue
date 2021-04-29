@@ -3,13 +3,13 @@
         <v-card-title>
             Products
             <v-spacer v-for="spacer_i in 6" :key="spacer_i"></v-spacer>
-            <v-text-field single-line hide-details v-model="search"
+            <v-text-field clearable single-line hide-details v-model="search"
                 append-icon="search" label="Search">
             </v-text-field>
         </v-card-title>
 
         <v-data-table show-select multi-sort class="elevation-1" v-model="selected"
-            :headers="headers" :items="products" :search="search" item-key="id"
+            :headers="headers" :items="products" :search="search" item-key="id" :items-per-page="-1"
             :footer-props="{
                 showFirstLastPage: true,
                 showCurrentPage: true,
@@ -28,23 +28,19 @@
             </template>
 
             <template v-slot:item.price="{ item }">
-                <div style="min-width: 4em;" v-text="item.price">
-                </div>
+                <div style="min-width: 4em;" v-text="item.price"></div>
             </template>
 
             <template v-slot:item.updated_at="{ item, value }">
-                <div style="min-width: 10em;" v-text="value.slice(0, value.length - 4)">
-                </div>
+                <div style="min-width: 10em;" v-text="value.slice(0, value.length - 4)"></div>
             </template>
-
         </v-data-table>
-
     </v-card>
 </template>
 
 <script>
 module.exports = {
-    data: function() {
+    data() {
         return {
             selected: [],
             search: '',
@@ -75,7 +71,7 @@ module.exports = {
         }
     },
     methods: {
-
+        
     },
 }
 </script>

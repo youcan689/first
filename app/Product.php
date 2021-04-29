@@ -9,7 +9,11 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $table = 'products';
-
+    
+    protected $fillable = [
+        'title', 'description', 'price', 'published',
+    ];
+    
     public function user()
     {
         return $this->belongsTo(User::class);
